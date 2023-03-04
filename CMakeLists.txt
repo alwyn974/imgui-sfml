@@ -19,6 +19,7 @@ endif()
 option(IMGUI_SFML_BUILD_EXAMPLES "Build ImGui_SFML examples" OFF)
 option(IMGUI_SFML_FIND_SFML "Use find_package to find SFML" ON)
 option(IMGUI_SFML_IMGUI_DEMO "Build imgui_demo.cpp" OFF)
+option(IMGUI_SFML_INSTALL "Install ImGui_SFML" ON)
 
 # If you want to use your own user config when compiling ImGui, please set the following variables
 # For example, if you have your config in /path/to/dir/with/config/myconfig.h, set the variables as follows:
@@ -171,14 +172,16 @@ if(IMGUI_SFML_BUILD_EXAMPLES)
   add_subdirectory(examples)
 endif()
 
-# installation rules
-install(TARGETS ImGui-SFML
-  EXPORT ImGui-SFML
-  RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
-  LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
-  ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
-  PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
-)
+if (IMGUI_SFML_INSTALL)
+  # installation rules
+  install(TARGETS ImGui-SFML
+    EXPORT ImGui-SFML
+    RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+    ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
+    PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
+  )
+endif ()
 
 #install(EXPORT ImGui-SFML
 #  DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/ImGui-SFML
